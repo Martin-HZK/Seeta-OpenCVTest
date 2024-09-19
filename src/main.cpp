@@ -94,12 +94,12 @@ int main(void) {
     seeta::FaceDatabase FDB(FR_model);
 
 
-    bool ret = FDB.Save("../tester/Seeta.db");
-
-    if(ret)
-        cout << "Success in save" << endl;
-    else
-        cout << "Fail in save" << endl;
+//    bool ret = FDB.Save("../tester/Seeta.db");
+//
+//    if(ret)
+//        cout << "Success in save" << endl;
+//    else
+//        cout << "Fail in save" << endl;
 
     bool ret1 = FDB.Load("../tester/Seeta.db");
 
@@ -118,16 +118,16 @@ int main(void) {
     }
     cout << "Image successfully read" << endl;
 
-    for(int i = 0; i < 5; i++) {
+//    for(int i = 0; i < 5; i++) {
         int64_t registerId = RegisterFace("../tester/pics/test1.jpg", FD, PD, FDB);
 
         cout << "The register id is: " << registerId << endl;
 
-    }
+//    }
 
 
 
-    ret = FDB.Save("../tester/Seeta.db");
+    bool ret = FDB.Save("../tester/Seeta.db");
 
 
     if(ret)
