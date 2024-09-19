@@ -173,6 +173,8 @@ CMakeFiles/seeta.dir/src/main.cpp.o: \
  /home/hzk/Documents/test/SeetaTest/include/seetaface2/FaceDetector/include/seeta/CStruct.h \
  /home/hzk/Documents/test/SeetaTest/include/seetaface2/FaceLandmarker/include/seeta/FaceLandmarker.h \
  /home/hzk/Documents/test/SeetaTest/include/seetaface2/FaceLandmarker/include/seeta/Struct.h \
+ /home/hzk/Documents/test/SeetaTest/include/seetaface2/QualityAssessor/include/seeta/QualityAssessor.h \
+ /home/hzk/Documents/test/SeetaTest/include/seetaface2/QualityAssessor/include/seeta/Struct.h \
  /home/hzk/Documents/test/SeetaTest/include/seetaface2/FaceDetector/include/seeta/Struct.h \
  /home/hzk/Documents/test/SeetaTest/include/opencv2/opencv.hpp \
  /home/hzk/Documents/test/SeetaTest/include/opencv2/opencv_modules.hpp \

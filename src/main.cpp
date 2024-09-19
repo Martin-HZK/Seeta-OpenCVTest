@@ -118,12 +118,17 @@ int main(void) {
     }
     cout << "Image successfully read" << endl;
 
+    for(int i = 0; i < 5; i++) {
+        int64_t registerId = RegisterFace("../tester/pics/test1.jpg", FD, PD, FDB);
 
-    int64_t registerId = RegisterFace("../tester/pics/test1.jpg", FD, PD, FDB);
+        cout << "The register id is: " << registerId << endl;
 
-    cout << "The register id is: " << registerId << endl;
+    }
+
+
 
     ret = FDB.Save("../tester/Seeta.db");
+
 
     if(ret)
         cout << "Success in save" << endl;
