@@ -12,7 +12,6 @@ using namespace std;
 using namespace cv;
 
 
-
 #define MIN_FACE_SIZE 80
 
 std::vector<SeetaFaceInfo> DetectFace(seeta::FaceDetector &FD, const SeetaImageData &image) {
@@ -55,7 +54,7 @@ int main(void) {
     int id = 0;
 
     seeta::ModelSetting FR_model("../models/fr_2_10.dat", device, id);
-    seeta::FaceDatabase FDB(FR_model); 
+    seeta::FaceDatabase FDB(FR_model);
 
     testgdb();
 
@@ -73,9 +72,46 @@ int main(void) {
     else
         cout << "Fail in load" << endl;
 
-    
 
+    cv::Mat image = cv::imread("../tester/pics/test1.jpg");
 
+    // 检查图片是否成功读取
+    if (image.empty()) {
+        std::cerr << "Error: Image could not be read." << std::endl;
+        return -1;
+    }
+    cout << "Image successfully read" << endl;
     return 0;
-    
+
 }
+
+
+
+//int main( int argc,char** argv )
+//{
+//    cv::Mat img_rgb,img_gry,img_any,img_dep,img_unc;
+//    cv::namedWindow("Example RGB", cv::WINDOW_AUTOSIZE );
+//    cv::namedWindow("Example GRY", cv::WINDOW_AUTOSIZE );
+//    cv::namedWindow("Example ANY", cv::WINDOW_AUTOSIZE );
+//    cv::namedWindow("Example DEP", cv::WINDOW_AUTOSIZE );
+//    cv::namedWindow("Example UNC", cv::WINDOW_AUTOSIZE );
+//
+//    //
+//    img_rgb=cv::imread( argv[1],cv::IMREAD_COLOR);
+//    if( !img_rgb.empty() ) 	cv::imshow("Example RGB",img_rgb );
+//    //
+//    img_gry=cv::imread( argv[1],cv::IMREAD_GRAYSCALE);
+//    if( !img_gry.empty() ) 	cv::imshow("Example GRY",img_gry );
+//    //
+//    img_any=cv::imread( argv[1],cv::IMREAD_ANYCOLOR);
+//    if( !img_any.empty() ) 	cv::imshow("Example ANY",img_any );
+//    //
+//    img_dep=cv::imread( argv[1],cv::IMREAD_ANYDEPTH);
+//    if( !img_dep.empty() ) 	cv::imshow("Example DEP",img_dep );
+//    //
+//    img_unc=cv::imread( argv[1],cv::IMREAD_UNCHANGED);
+//    if( !img_unc.empty() ) 	cv::imshow("Example UNC",img_unc );
+//
+//    cv::waitKey(0);
+//    return(0);
+//}

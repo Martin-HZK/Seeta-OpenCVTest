@@ -202,6 +202,11 @@
 			},
 			{
 				"backtrace" : 2,
+				"fragment" : "/home/hzk/Documents/test/SeetaTest/libs/opencv/3rdparty/libIlmImf.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
 				"fragment" : "/home/hzk/Documents/test/SeetaTest/libs/opencv/3rdparty/liblibjpeg-turbo.a",
 				"role" : "libraries"
 			},
