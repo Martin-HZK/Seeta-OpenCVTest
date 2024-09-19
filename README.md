@@ -2,7 +2,9 @@
 
 
 
-## FaceDatabase Storage of Seetaface2
+## Seetaface2 FaceDatabase Storage Ability
+
+### Storing pics
 
 I take a jpg file of a woman's face from the Internet with the size of <u>4.0k</u>. Then the same face data is stored into the face database iteratively for **5 times** and save to the `Seeta.db` file I created in advance. The result turns out that the size of the database is <u>24K</u>.
 
@@ -12,6 +14,13 @@ I take a jpg file of a woman's face from the Internet with the size of <u>4.0k</
 *Size result:*
 
 ![StoreTest](./testResults/DBSize.png)
+
+
+### Permanent Storage
+
+The same db file can be loaded again and load in more face images.
+
+![PermanentTest](./testResults/permanant_storage.png)
 
 
 ## Appendix
