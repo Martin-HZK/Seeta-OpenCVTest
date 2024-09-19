@@ -1,0 +1,3 @@
+/home/hzk/Documents/test/SeetaTest/build/CMakeFiles/seeta.dir
+/home/hzk/Documents/test/SeetaTest/build/CMakeFiles/edit_cache.dir
+/home/hzk/Documents/test/SeetaTest/build/CMakeFiles/rebuild_cache.dir

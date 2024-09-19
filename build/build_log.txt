@@ -1,0 +1,2 @@
+[ 50%] Linking CXX executable seeta
+[100%] Built target seeta
