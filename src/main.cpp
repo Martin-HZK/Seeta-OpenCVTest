@@ -4,6 +4,7 @@
 #include "seeta/FaceDetector.h"
 #include "seeta/FaceLandmarker.h"
 #include "seeta/FaceDetector.h"
+#include "seeta/QualityAssessor.h"
 #include "seeta/Struct.h"
 #include "opencv2/opencv.hpp"
 #include "Struct_cv.h"
@@ -44,7 +45,38 @@ static int64_t RegisterFace(const cv::String& filePath, seeta::FaceDetector &FD,
 }
 
 
+static int64_t RecognizeFace(const cv::String& filePath, seeta::FaceDetector &FD, seeta::FaceLandmarker &PD,
+                             seeta::FaceDatabase &FDB) {
+    seeta::QualityAssessor QA;
+    float threshold = 0.7f; // 识别阈值
+    cv::Mat frame = cv::imread(filePath);
+    seeta::cv::ImageData image = frame;
 
+    auto f = FD.detect(image);
+    vector<SeetaFaceInfo> faces = vector<SeetaFaceInfo>(f.data, f.data + f.size);
+    for (int i = 0; i < faces.size(); i++) {
+        SeetaFaceInfo &face = faces[i];
+        int64_t index = -1;
+        float similarity = 0;
+        vector<SeetaPointF> points(PD.number());
+        PD.mark(image, face.pos, points.data());                  // 获取人脸框信息
+        auto score = QA.evaluate(image, face.pos, points.data()); // 获取人脸质量评分
+        char *name;
+        if (score == 0) {
+            // name = "ignored";
+        } else {
+            auto queried = FDB.QueryTop(image, points.data(), 1, &index, &similarity); // 从注册的人脸数据库中对比相似度
+            if (queried < 1) {
+                continue;
+            }
+            // if the result got return 0 instead!
+            if (similarity > threshold) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 int main(void) {
 
@@ -52,11 +84,15 @@ int main(void) {
 
     seeta::ModelSetting::Device device = seeta::ModelSetting::CPU;
     int id = 0;
-
+    seeta::ModelSetting FD_model("../models/fd_2_00.dat", device, id);
+    seeta::ModelSetting PD_model("../models/pd_2_00_pts5.dat", device, id);
     seeta::ModelSetting FR_model("../models/fr_2_10.dat", device, id);
+
+
+    seeta::FaceDetector FD(FD_model);    // 创建人脸检测模块
+    seeta::FaceLandmarker PD(PD_model);
     seeta::FaceDatabase FDB(FR_model);
 
-    testgdb();
 
     bool ret = FDB.Save("../tester/Seeta.db");
 
@@ -81,6 +117,19 @@ int main(void) {
         return -1;
     }
     cout << "Image successfully read" << endl;
+
+
+    int64_t registerId = RegisterFace("../tester/pics/test1.jpg", FD, PD, FDB);
+
+    cout << "The register id is: " << registerId << endl;
+
+    ret = FDB.Save("../tester/Seeta.db");
+
+    if(ret)
+        cout << "Success in save" << endl;
+    else
+        cout << "Fail in save" << endl;
+
     return 0;
 
 }
